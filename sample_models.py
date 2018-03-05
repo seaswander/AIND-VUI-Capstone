@@ -1,7 +1,7 @@
 from keras import backend as K
 from keras.models import Model
 from keras.layers import (BatchNormalization, Conv1D, Dense, Input, 
-    TimeDistributed, Activation, Bidirectional, SimpleRNN, GRU, LSTM)
+    TimeDistributed, Activation, Bidirectional, SimpleRNN, GRU, LSTM, Dropout, MaxPooling1D, Flatten)
 
 def simple_rnn_model(input_dim, output_dim=29):
     """ Build a recurrent network for speech 
@@ -132,7 +132,8 @@ def bidirectional_rnn_model(input_dim, units, output_dim=29):
     print(model.summary())
     return model
 
-def final_model():
+def final_model(input_dim, filters, kernel_size, conv_stride,
+    conv_border_mode, units, drop_p = 0.5, output_dim=29):
     """ Build a deep network for speech 
     """
     # Main acoustic input
@@ -152,7 +153,7 @@ def final_model():
     bn_bidir_rnn = BatchNormalization(name = 'bn_bidir_rnn')(bidir_rnn)
 
     #dropout_layer = Dropout(dropout_p)(bn_bidir_rnn2)
-    time_dense = TimeDistributed(Dense(output_dim))(bn_bidir_rnn1)
+    time_dense = TimeDistributed(Dense(output_dim))(bn_bidir_rnn)
     # TODO: Add softmax activation layer
     y_pred = Activation('softmax', name='softmax')(time_dense)
     # Specify the model
