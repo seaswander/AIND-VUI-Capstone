@@ -15155,7 +15155,7 @@ UkqpyuQgPaWUUkoppSqTg/SUUkoppZSqTA7SU0oppZRSqjI5SE8ppZRSSqnK5CA9pZRSSimlKpOD
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#####################################################################</span>
@@ -15191,10 +15191,9 @@ UkqpyuQgPaWUUkoppSqTg/SUUkoppZSqTA7SU0oppZRSqjI5SE8ppZRSSqnK5CA9pZRSSimlKpOD
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Using TensorFlow backend.
-C:\Users\Elsey\Anaconda3\envs\aind-vui\lib\site-packages\h5py\__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
-  from ._conv import register_converters as _register_converters
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
 </pre>
 </div>
 </div>
@@ -17035,12 +17034,12 @@ Convolution filters have the ability to learn good features from the frequency d
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sample_models</span> <span class="k">import</span> <span class="n">final_model</span>
 <span class="c1"># specify the model</span>
-<span class="n">model_end</span> <span class="o">=</span> <span class="n">final_model</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="c1"># change to 13 if you would like to use MFCC features</span>
+<span class="n">model_end</span> <span class="o">=</span> <span class="n">final_model</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">161</span><span class="p">,</span> <span class="c1"># change to 13 if you would like to use MFCC features</span>
                         <span class="n">filters</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
                         <span class="n">kernel_size</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> 
                         <span class="n">conv_stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -17065,29 +17064,25 @@ Convolution filters have the ability to learn good features from the frequency d
 <pre>_________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-the_input (InputLayer)       (None, None, 13)          0         
+the_input (InputLayer)       (None, None, 161)         0         
 _________________________________________________________________
-conv_1d (Conv1D)             (None, None, 200)         28800     
+conv_1d (Conv1D)             (None, None, 200)         354400    
 _________________________________________________________________
-dropout_9 (Dropout)          (None, None, 200)         0         
+dropout_6 (Dropout)          (None, None, 200)         0         
 _________________________________________________________________
 bn_cnn (BatchNormalization)  (None, None, 200)         800       
 _________________________________________________________________
-bidirectional_19 (Bidirectio (None, None, 400)         481200    
+bidirectional_6 (Bidirection (None, None, 400)         481200    
 _________________________________________________________________
-bn_bidir_rnn_1 (BatchNormali (None, None, 400)         1600      
+bn_bidir_rnn (BatchNormaliza (None, None, 400)         1600      
 _________________________________________________________________
-bidirectional_20 (Bidirectio (None, None, 400)         721200    
-_________________________________________________________________
-bn_bidir_rnn_2 (BatchNormali (None, None, 400)         1600      
-_________________________________________________________________
-time_distributed_9 (TimeDist (None, None, 29)          11629     
+time_distributed_6 (TimeDist (None, None, 29)          11629     
 _________________________________________________________________
 softmax (Activation)         (None, None, 29)          0         
 =================================================================
-Total params: 1,246,829
-Trainable params: 1,244,829
-Non-trainable params: 2,000
+Total params: 849,629
+Trainable params: 848,429
+Non-trainable params: 1,200
 _________________________________________________________________
 None
 </pre>
@@ -17109,14 +17104,14 @@ None
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_model</span><span class="p">(</span><span class="n">input_to_softmax</span><span class="o">=</span><span class="n">model_end</span><span class="p">,</span> 
             <span class="n">pickle_path</span><span class="o">=</span><span class="s1">&#39;model_end.pickle&#39;</span><span class="p">,</span> 
             <span class="n">save_model_path</span><span class="o">=</span><span class="s1">&#39;model_end.h5&#39;</span><span class="p">,</span> 
-            <span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
-            <span class="n">spectrogram</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># change to False if you would like to use MFCC features</span>
+            <span class="n">epochs</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="n">spectrogram</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># change to False if you would like to use MFCC features</span>
 </pre></div>
 
 </div>
@@ -17133,206 +17128,126 @@ None
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Epoch 1/100
-106/106 [==============================] - 725s - loss: 291.8755 - val_loss: 254.7166
-Epoch 2/100
-106/106 [==============================] - 758s - loss: 241.3394 - val_loss: 219.3225
-Epoch 3/100
-106/106 [==============================] - 748s - loss: 231.8980 - val_loss: 219.8306
-Epoch 4/100
-106/106 [==============================] - 750s - loss: 227.9593 - val_loss: 210.2764
-Epoch 5/100
-106/106 [==============================] - 746s - loss: 220.3869 - val_loss: 221.0135
-Epoch 6/100
-106/106 [==============================] - 748s - loss: 214.5480 - val_loss: 200.4293
-Epoch 7/100
-106/106 [==============================] - 754s - loss: 207.9641 - val_loss: 204.0061
-Epoch 8/100
-106/106 [==============================] - 740s - loss: 201.0859 - val_loss: 187.1937
-Epoch 9/100
-106/106 [==============================] - 722s - loss: 194.5523 - val_loss: 183.9319
-Epoch 10/100
-106/106 [==============================] - 705s - loss: 188.0516 - val_loss: 175.3393
-Epoch 11/100
-106/106 [==============================] - 697s - loss: 183.0814 - val_loss: 167.4718
-Epoch 12/100
-106/106 [==============================] - 701s - loss: 179.3255 - val_loss: 164.6276
-Epoch 13/100
-106/106 [==============================] - 691s - loss: 174.5241 - val_loss: 162.6617
-Epoch 14/100
-106/106 [==============================] - 698s - loss: 171.0902 - val_loss: 156.8181
-Epoch 15/100
-106/106 [==============================] - 704s - loss: 168.3906 - val_loss: 155.7625
-Epoch 16/100
-106/106 [==============================] - 695s - loss: 165.2519 - val_loss: 153.4554
-Epoch 17/100
-106/106 [==============================] - 699s - loss: 162.5607 - val_loss: 150.3541
-Epoch 18/100
-106/106 [==============================] - 700s - loss: 160.4640 - val_loss: 146.4666
-Epoch 19/100
-106/106 [==============================] - 703s - loss: 158.8078 - val_loss: 149.1220
-Epoch 20/100
-106/106 [==============================] - 694s - loss: 157.0003 - val_loss: 147.2635
-Epoch 21/100
-106/106 [==============================] - 696s - loss: 155.4985 - val_loss: 140.8306
-Epoch 22/100
-106/106 [==============================] - 710s - loss: 153.9362 - val_loss: 143.0410
-Epoch 23/100
-106/106 [==============================] - 702s - loss: 153.0651 - val_loss: 138.9430
-Epoch 24/100
-106/106 [==============================] - 704s - loss: 150.6802 - val_loss: 139.0431
-Epoch 25/100
-106/106 [==============================] - 696s - loss: 149.3569 - val_loss: 137.2866
-Epoch 26/100
-106/106 [==============================] - 695s - loss: 148.3775 - val_loss: 134.2505
-Epoch 27/100
-106/106 [==============================] - 697s - loss: 146.7188 - val_loss: 135.7264
-Epoch 28/100
-106/106 [==============================] - 692s - loss: 145.8821 - val_loss: 133.7223
-Epoch 29/100
-106/106 [==============================] - 702s - loss: 144.7295 - val_loss: 131.7988
-Epoch 30/100
-106/106 [==============================] - 704s - loss: 143.7810 - val_loss: 131.8276
-Epoch 31/100
-106/106 [==============================] - 699s - loss: 143.9939 - val_loss: 131.6494
-Epoch 32/100
-106/106 [==============================] - 705s - loss: 142.7332 - val_loss: 130.2413
-Epoch 33/100
-106/106 [==============================] - 701s - loss: 141.0907 - val_loss: 128.5147
-Epoch 34/100
-106/106 [==============================] - 693s - loss: 139.7781 - val_loss: 128.6910
-Epoch 35/100
-106/106 [==============================] - 701s - loss: 138.6290 - val_loss: 127.9731
-Epoch 36/100
-106/106 [==============================] - 699s - loss: 138.1232 - val_loss: 126.6497
-Epoch 37/100
-106/106 [==============================] - 699s - loss: 136.8346 - val_loss: 124.5126
-Epoch 38/100
-106/106 [==============================] - 702s - loss: 136.0430 - val_loss: 122.4661
-Epoch 39/100
-106/106 [==============================] - 702s - loss: 134.1490 - val_loss: 124.3330
-Epoch 40/100
-106/106 [==============================] - 701s - loss: 133.6834 - val_loss: 123.5949
-Epoch 41/100
-106/106 [==============================] - 705s - loss: 132.8703 - val_loss: 122.0254
-Epoch 42/100
-106/106 [==============================] - 694s - loss: 131.5935 - val_loss: 120.8527
-Epoch 43/100
-106/106 [==============================] - 704s - loss: 131.9256 - val_loss: 121.7445
-Epoch 44/100
-106/106 [==============================] - 704s - loss: 130.6350 - val_loss: 120.7674
-Epoch 45/100
-106/106 [==============================] - 698s - loss: 129.9900 - val_loss: 120.4605
-Epoch 46/100
-106/106 [==============================] - 703s - loss: 129.2843 - val_loss: 119.8527
-Epoch 47/100
-106/106 [==============================] - 700s - loss: 128.0598 - val_loss: 119.5108
-Epoch 48/100
-106/106 [==============================] - 707s - loss: 127.8710 - val_loss: 119.7706
-Epoch 49/100
-106/106 [==============================] - 710s - loss: 127.0033 - val_loss: 118.5755
-Epoch 50/100
-106/106 [==============================] - 694s - loss: 126.8760 - val_loss: 116.3164
-Epoch 51/100
-106/106 [==============================] - 696s - loss: 125.7278 - val_loss: 116.0863
-Epoch 52/100
-106/106 [==============================] - 709s - loss: 124.4299 - val_loss: 116.3296
-Epoch 53/100
-106/106 [==============================] - 696s - loss: 123.6838 - val_loss: 114.3157
-Epoch 54/100
-106/106 [==============================] - 701s - loss: 123.3987 - val_loss: 115.1984
-Epoch 55/100
-106/106 [==============================] - 702s - loss: 123.4696 - val_loss: 117.3049
-Epoch 56/100
-106/106 [==============================] - 696s - loss: 122.3823 - val_loss: 115.9935
-Epoch 57/100
-106/106 [==============================] - 704s - loss: 122.1840 - val_loss: 116.3829
-Epoch 58/100
-106/106 [==============================] - 706s - loss: 121.3235 - val_loss: 111.5018
-Epoch 59/100
-106/106 [==============================] - 698s - loss: 121.2442 - val_loss: 113.6763
-Epoch 60/100
-106/106 [==============================] - 703s - loss: 120.4170 - val_loss: 114.2370
-Epoch 61/100
-106/106 [==============================] - 700s - loss: 119.5619 - val_loss: 112.1856
-Epoch 62/100
-106/106 [==============================] - 698s - loss: 118.7014 - val_loss: 113.7120
-Epoch 63/100
-106/106 [==============================] - 703s - loss: 118.0527 - val_loss: 112.9920
-Epoch 64/100
-106/106 [==============================] - 715s - loss: 117.1301 - val_loss: 111.5825
-Epoch 65/100
-106/106 [==============================] - 700s - loss: 116.2628 - val_loss: 108.9228
-Epoch 66/100
-106/106 [==============================] - 707s - loss: 116.5535 - val_loss: 110.9761
-Epoch 67/100
-106/106 [==============================] - 705s - loss: 115.1047 - val_loss: 109.5210
-Epoch 68/100
-106/106 [==============================] - 709s - loss: 115.1051 - val_loss: 110.8581
-Epoch 69/100
-106/106 [==============================] - 697s - loss: 113.8713 - val_loss: 108.4392
-Epoch 70/100
-106/106 [==============================] - 702s - loss: 113.7603 - val_loss: 109.1433
-Epoch 71/100
-106/106 [==============================] - 703s - loss: 113.6660 - val_loss: 109.1287
-Epoch 72/100
-106/106 [==============================] - 695s - loss: 113.3627 - val_loss: 109.4515
-Epoch 73/100
-106/106 [==============================] - 706s - loss: 112.8205 - val_loss: 108.9054
-Epoch 74/100
-106/106 [==============================] - 700s - loss: 112.1789 - val_loss: 107.8606
-Epoch 75/100
-106/106 [==============================] - 704s - loss: 112.7265 - val_loss: 108.7055
-Epoch 76/100
-106/106 [==============================] - 750s - loss: 112.1192 - val_loss: 108.3674
-Epoch 77/100
-106/106 [==============================] - 746s - loss: 111.3580 - val_loss: 107.3261
-Epoch 78/100
-106/106 [==============================] - 763s - loss: 110.6205 - val_loss: 107.6833
-Epoch 79/100
-106/106 [==============================] - 756s - loss: 110.2970 - val_loss: 107.5749
-Epoch 80/100
-106/106 [==============================] - 753s - loss: 109.2067 - val_loss: 105.8719
-Epoch 81/100
-106/106 [==============================] - 764s - loss: 108.2425 - val_loss: 106.6773
-Epoch 82/100
-106/106 [==============================] - 760s - loss: 108.1679 - val_loss: 106.6457
-Epoch 83/100
-106/106 [==============================] - 750s - loss: 107.5247 - val_loss: 107.7351
-Epoch 84/100
-106/106 [==============================] - 759s - loss: 107.4834 - val_loss: 106.3465
-Epoch 85/100
-106/106 [==============================] - 747s - loss: 107.6849 - val_loss: 105.0263
-Epoch 86/100
-106/106 [==============================] - 749s - loss: 106.5688 - val_loss: 103.5557
-Epoch 87/100
-106/106 [==============================] - 754s - loss: 106.2115 - val_loss: 106.1769
-Epoch 88/100
-106/106 [==============================] - 752s - loss: 105.3217 - val_loss: 104.4372
-Epoch 89/100
-106/106 [==============================] - 749s - loss: 105.1375 - val_loss: 105.7327
-Epoch 90/100
-106/106 [==============================] - 733s - loss: 104.9564 - val_loss: 103.4159
-Epoch 91/100
-106/106 [==============================] - 708s - loss: 105.0273 - val_loss: 104.8523
-Epoch 92/100
-106/106 [==============================] - 693s - loss: 104.3924 - val_loss: 102.9859
-Epoch 93/100
-106/106 [==============================] - 702s - loss: 104.2074 - val_loss: 103.9384
-Epoch 94/100
-106/106 [==============================] - 703s - loss: 103.0817 - val_loss: 105.5402
-Epoch 95/100
-106/106 [==============================] - 702s - loss: 103.2222 - val_loss: 103.6171
-Epoch 96/100
-106/106 [==============================] - 697s - loss: 103.3713 - val_loss: 103.8739
-Epoch 97/100
-106/106 [==============================] - 707s - loss: 103.1291 - val_loss: 102.0336
-Epoch 98/100
-106/106 [==============================] - 703s - loss: 101.9919 - val_loss: 104.9231
-Epoch 99/100
-106/106 [==============================] - 702s - loss: 101.9823 - val_loss: 103.6851
-Epoch 100/100
-106/106 [==============================] - 693s - loss: 100.4122 - val_loss: 102.8025
+<pre>Epoch 1/60
+106/106 [==============================] - 305s - loss: 310.4631 - val_loss: 274.2025
+Epoch 2/60
+106/106 [==============================] - 300s - loss: 250.6560 - val_loss: 256.1484
+Epoch 3/60
+106/106 [==============================] - 303s - loss: 230.2421 - val_loss: 211.8700
+Epoch 4/60
+106/106 [==============================] - 303s - loss: 217.8907 - val_loss: 201.3215
+Epoch 5/60
+106/106 [==============================] - 304s - loss: 207.3734 - val_loss: 190.1912
+Epoch 6/60
+106/106 [==============================] - 306s - loss: 195.1190 - val_loss: 186.0261
+Epoch 7/60
+106/106 [==============================] - 301s - loss: 183.4186 - val_loss: 178.6631
+Epoch 8/60
+106/106 [==============================] - 302s - loss: 175.7852 - val_loss: 162.6669
+Epoch 9/60
+106/106 [==============================] - 304s - loss: 170.2808 - val_loss: 156.7791
+Epoch 10/60
+106/106 [==============================] - 300s - loss: 165.7336 - val_loss: 154.5687
+Epoch 11/60
+106/106 [==============================] - 303s - loss: 162.1597 - val_loss: 148.2072
+Epoch 12/60
+106/106 [==============================] - 303s - loss: 158.9015 - val_loss: 149.2714
+Epoch 13/60
+106/106 [==============================] - 304s - loss: 155.9522 - val_loss: 145.4012
+Epoch 14/60
+106/106 [==============================] - 305s - loss: 152.9385 - val_loss: 140.6970
+Epoch 15/60
+106/106 [==============================] - 300s - loss: 151.1414 - val_loss: 139.0774
+Epoch 16/60
+106/106 [==============================] - 303s - loss: 148.9801 - val_loss: 136.3377
+Epoch 17/60
+106/106 [==============================] - 304s - loss: 147.2305 - val_loss: 137.3843
+Epoch 18/60
+106/106 [==============================] - 305s - loss: 145.7046 - val_loss: 136.2826
+Epoch 19/60
+106/106 [==============================] - 307s - loss: 143.6316 - val_loss: 134.5659
+Epoch 20/60
+106/106 [==============================] - 306s - loss: 141.9632 - val_loss: 131.8509
+Epoch 21/60
+106/106 [==============================] - 302s - loss: 140.5766 - val_loss: 131.3868
+Epoch 22/60
+106/106 [==============================] - 306s - loss: 138.9444 - val_loss: 130.0473
+Epoch 23/60
+106/106 [==============================] - 308s - loss: 137.5673 - val_loss: 128.9228
+Epoch 24/60
+106/106 [==============================] - 304s - loss: 136.4022 - val_loss: 127.3541
+Epoch 25/60
+106/106 [==============================] - 304s - loss: 134.3933 - val_loss: 126.7216
+Epoch 26/60
+106/106 [==============================] - 304s - loss: 133.7323 - val_loss: 124.1412
+Epoch 27/60
+106/106 [==============================] - 303s - loss: 132.2672 - val_loss: 122.3213
+Epoch 28/60
+106/106 [==============================] - 304s - loss: 130.4299 - val_loss: 124.6691
+Epoch 29/60
+106/106 [==============================] - 301s - loss: 129.7041 - val_loss: 123.9128
+Epoch 30/60
+106/106 [==============================] - 305s - loss: 128.9695 - val_loss: 123.7755
+Epoch 31/60
+106/106 [==============================] - 306s - loss: 128.3726 - val_loss: 119.8989
+Epoch 32/60
+106/106 [==============================] - 305s - loss: 126.5457 - val_loss: 121.0086
+Epoch 33/60
+106/106 [==============================] - 306s - loss: 125.3776 - val_loss: 118.9457
+Epoch 34/60
+106/106 [==============================] - 305s - loss: 124.4503 - val_loss: 121.2608
+Epoch 35/60
+106/106 [==============================] - 301s - loss: 124.0188 - val_loss: 116.9782
+Epoch 36/60
+106/106 [==============================] - 305s - loss: 122.5649 - val_loss: 118.1075
+Epoch 37/60
+106/106 [==============================] - 307s - loss: 121.6854 - val_loss: 117.4690
+Epoch 38/60
+106/106 [==============================] - 301s - loss: 121.3515 - val_loss: 116.4650
+Epoch 39/60
+106/106 [==============================] - 305s - loss: 119.8850 - val_loss: 117.3170
+Epoch 40/60
+106/106 [==============================] - 308s - loss: 119.5215 - val_loss: 116.3966
+Epoch 41/60
+106/106 [==============================] - 303s - loss: 118.5605 - val_loss: 114.6618
+Epoch 42/60
+106/106 [==============================] - 303s - loss: 117.7201 - val_loss: 114.4223
+Epoch 43/60
+106/106 [==============================] - 303s - loss: 116.9249 - val_loss: 115.4214
+Epoch 44/60
+106/106 [==============================] - 304s - loss: 116.6699 - val_loss: 114.5703
+Epoch 45/60
+106/106 [==============================] - 306s - loss: 116.1843 - val_loss: 112.1332
+Epoch 46/60
+106/106 [==============================] - 302s - loss: 115.6435 - val_loss: 115.1668
+Epoch 47/60
+106/106 [==============================] - 305s - loss: 114.5061 - val_loss: 113.9035
+Epoch 48/60
+106/106 [==============================] - 306s - loss: 114.4590 - val_loss: 113.6945
+Epoch 49/60
+106/106 [==============================] - 310s - loss: 113.8488 - val_loss: 113.4154
+Epoch 50/60
+106/106 [==============================] - 306s - loss: 113.2678 - val_loss: 111.9155
+Epoch 51/60
+106/106 [==============================] - 305s - loss: 112.1561 - val_loss: 111.3381
+Epoch 52/60
+106/106 [==============================] - 303s - loss: 111.8417 - val_loss: 110.2669
+Epoch 53/60
+106/106 [==============================] - 303s - loss: 110.6112 - val_loss: 111.6142
+Epoch 54/60
+106/106 [==============================] - 306s - loss: 110.1324 - val_loss: 110.3291
+Epoch 55/60
+106/106 [==============================] - 307s - loss: 109.8591 - val_loss: 108.5885
+Epoch 56/60
+106/106 [==============================] - 307s - loss: 109.3580 - val_loss: 111.4668
+Epoch 57/60
+106/106 [==============================] - 307s - loss: 108.7039 - val_loss: 110.2946
+Epoch 58/60
+106/106 [==============================] - 304s - loss: 108.5449 - val_loss: 110.2617
+Epoch 59/60
+106/106 [==============================] - 304s - loss: 108.2847 - val_loss: 107.8160
+Epoch 60/60
+106/106 [==============================] - 307s - loss: 107.5819 - val_loss: 109.3602
 </pre>
 </div>
 </div>
@@ -17360,8 +17275,6 @@ At first, I ambitiously try to merge model_1 to model_5, but that just take way 
 </li>
 <li><p>The last softmax layer, is used for multi-classification in logistic regression model, as a common technic.</p>
 </li>
-<li><p>MFCC require less resources, which is good for training a deep rnn.</p>
-</li>
 </ol>
 
 </div>
@@ -17379,7 +17292,7 @@ At first, I ambitiously try to merge model_1 to model_5, but that just take way 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -17445,7 +17358,7 @@ At first, I ambitiously try to merge model_1 to model_5, but that just take way 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_predictions</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
@@ -17480,15 +17393,15 @@ the_input (InputLayer)       (None, None, 161)         0
 _________________________________________________________________
 conv_1d (Conv1D)             (None, None, 200)         354400    
 _________________________________________________________________
-dropout_2 (Dropout)          (None, None, 200)         0         
+dropout_7 (Dropout)          (None, None, 200)         0         
 _________________________________________________________________
 bn_cnn (BatchNormalization)  (None, None, 200)         800       
 _________________________________________________________________
-bidirectional_3 (Bidirection (None, None, 400)         481200    
+bidirectional_7 (Bidirection (None, None, 400)         481200    
 _________________________________________________________________
 bn_bidir_rnn (BatchNormaliza (None, None, 400)         1600      
 _________________________________________________________________
-time_distributed_2 (TimeDist (None, None, 29)          11629     
+time_distributed_7 (TimeDist (None, None, 29)          11629     
 _________________________________________________________________
 softmax (Activation)         (None, None, 29)          0         
 =================================================================
@@ -17504,7 +17417,7 @@ mister quilter is the apostle of the middle classes and we are glad to welcome h
 --------------------------------------------------------------------------------
 Predicted transcription:
 
-whis to coter riseap poselolf e me cses on we  ga to woke e is pospo
+wi he coter ise psoff mi clasls an weer gla tlalkem he his gosble
 --------------------------------------------------------------------------------
 </pre>
 </div>
@@ -17525,7 +17438,7 @@ whis to coter riseap poselolf e me cses on we  ga to woke e is pospo
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_predictions</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
@@ -17560,15 +17473,15 @@ the_input (InputLayer)       (None, None, 161)         0
 _________________________________________________________________
 conv_1d (Conv1D)             (None, None, 200)         354400    
 _________________________________________________________________
-dropout_3 (Dropout)          (None, None, 200)         0         
+dropout_8 (Dropout)          (None, None, 200)         0         
 _________________________________________________________________
 bn_cnn (BatchNormalization)  (None, None, 200)         800       
 _________________________________________________________________
-bidirectional_4 (Bidirection (None, None, 400)         481200    
+bidirectional_8 (Bidirection (None, None, 400)         481200    
 _________________________________________________________________
 bn_bidir_rnn (BatchNormaliza (None, None, 400)         1600      
 _________________________________________________________________
-time_distributed_3 (TimeDist (None, None, 29)          11629     
+time_distributed_8 (TimeDist (None, None, 29)          11629     
 _________________________________________________________________
 softmax (Activation)         (None, None, 29)          0         
 =================================================================
@@ -17584,7 +17497,7 @@ stuff it into you his belly counselled him
 --------------------------------------------------------------------------------
 Predicted transcription:
 
-s tof foentee his belly coctote
+stofrten to your his bely coutin em
 --------------------------------------------------------------------------------
 </pre>
 </div>
